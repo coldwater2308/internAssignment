@@ -75,7 +75,7 @@ exports.updateEvent= async(req,res,next)=>{
               const event = await Event.findByIdAndUpdate( id,{
                   name: name ,
                   type:type,
-                  created_By: createdBy,
+                  created_by: createdBy,
                   address:address
               }) 
               if(event)
