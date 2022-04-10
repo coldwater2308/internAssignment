@@ -136,8 +136,8 @@ exports.getEventsByUser = async(req,res,next)=>{
               
                     //  We have to make it integer because
                     // query parameter passed is string
-                const limit = parseInt(size); 
-                const page= parseInt(pages)
+                let limit = parseInt(size); 
+                let page= parseInt(pages)
                 const events = await Event.find({created_by:mongoose.Types.ObjectId(userId)}).skip((page-1)*limit).limit(limit).sort({ createdAt: 1, _id: 1 })
               
                 if (events)
@@ -179,10 +179,10 @@ exports.getInvitedEvents= async(req,res,next)=>{
                 
                         //  We have to make it integer because
                         // query parameter passed is string
-        const limit = parseInt(size);
-        const page=parseInt(pages)
+        let limit = parseInt(size);
+        let page=parseInt(pages)
 
-        const events= await Event.find({"invited.userId" : mongoose.Types.ObjectId(id)}).sort({ createdAt: 1, _id: 1 }).skip((page-1)*limit).limit(limit)
+        const events= await Event.find({"invited.userId" : mongoose.Types.ObjectId(id)}).skip((page-1)*limit).limit(limit).sort({ createdAt: 1, _id: 1 })
                    if(events)
                         return res.status(203).json({
                             message:"Success",
